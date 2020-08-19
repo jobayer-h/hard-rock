@@ -3,9 +3,16 @@ function getLyrics(artist, title) {
         .then(res => res.json())
         .then(lyricData => {
             const lyrics = lyricData.lyrics;
-            const lyricesDisplay = document.getElementById('single-lyrics');
-            lyricesDisplay.innerHTML = `<h2 class="text-success mb-4">${artist} - ${title}</h2>
-                                        <pre class="lyric text-white">${lyrics}</pre>`
+            
+            if (lyrics == undefined) {
+                const lyricesDisplay = document.getElementById('single-lyrics');
+                lyricesDisplay.innerHTML = `<h2 class="text-success mb-4">${artist} - ${title}</h2>
+                                            <pre class="lyric text-white">Sorry, We can't find "${title}" song Lyrics in our API. Please try some outher song.</pre>`
+            } else {
+                    const lyricesDisplay = document.getElementById('single-lyrics');
+                    lyricesDisplay.innerHTML = `<h2 class="text-success mb-4">${artist} - ${title}</h2>
+                                                <pre class="lyric text-white">${lyrics}</pre>`
+            }
         })
         document.getElementById('search-result').innerHTML = ''; // close song suggestions staff
 }
