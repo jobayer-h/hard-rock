@@ -26,7 +26,7 @@ document.getElementById('song-name-input').addEventListener("keyup", function(ev
 function searchResult() {
     const songName = document.getElementById('song-name-input').value;
     if (songName.length == 0) {
-        alert('please enter your artist or Song')
+        alert('please enter your artist or Song Name')
     } else {
         document.getElementById('search-result').innerHTML = ''; // for remove previously searched songs
         document.getElementById('single-lyrics').innerHTML = ''; // for close previously opened Lyrics
