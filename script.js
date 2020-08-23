@@ -5,9 +5,7 @@ function getLyrics(artist, title) {
             const lyrics = lyricData.lyrics;
             
             if (lyrics == undefined) {
-                const lyricesDisplay = document.getElementById('single-lyrics');
-                lyricesDisplay.innerHTML = `<h2 class="text-success mb-4">${artist} - ${title}</h2>
-                                            <pre class="lyric text-white">Sorry, We can't find "${title}" song Lyrics in our API. Please try some outher song.</pre>`
+                alert(`Sorry, We can't find '${title}' Lyrics in our API. Please try some outher songs.`);
             } else {
                     const lyricesDisplay = document.getElementById('single-lyrics');
                     lyricesDisplay.innerHTML = `<h2 class="text-success mb-4">${artist} - ${title}</h2>
@@ -36,7 +34,7 @@ function searchResult() {
         .then(res => res.json())
         .then(apiData => {
             const songs = apiData.data;
-            for (let i = 0; i < 10; i++) {
+            for (let i = 0; i < songs.length; i++) {
                 const song = songs[i];
                 const title = song.title;
                 const artist = song.artist.name;
@@ -45,14 +43,14 @@ function searchResult() {
     // result template           
                 const result = document.getElementById('search-result');
                 result.innerHTML += `<div class="single-result row align-items-center my-3 p-3">
-                                            <div class="col-md-2">
+                                            <div class="col-md-3 col-sm-2 col-4">
                                             <img class="img-thumbnail" src="${img}" alt="Cover Picture">
                                             </div>
-                                            <div class="col-md-7">
+                                            <div class="col-md-6 col-sm-7 col-8">
                                             <h3 class="lyrics-name">${title}</h3>
                                             <p class="author lead">${type} by <span>${artist}</span></p>
                                         </div>
-                                        <div class="col-md-3 text-md-right text-center">
+                                        <div class="col-md-3 col-sm-3 text-md-right text-center">
                                             <button onclick="getLyrics('${artist}','${title}')" class="btn btn-success">Get Lyrics</button>
                                         </div>
                                     </div>`
