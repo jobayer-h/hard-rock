@@ -1,5 +1,7 @@
+const api = 'https://api.lyrics.ovh';
+
 function getLyrics(artist, title) {
-    fetch(`https://api.lyrics.ovh/v1/${artist}/${title}`)
+    fetch(`${api}/v1/${artist}/${title}`)
         .then(res => res.json())
         .then(lyricData => {
             const lyrics = lyricData.lyrics;
@@ -30,7 +32,7 @@ function searchResult() {
     } else {
         document.getElementById('search-result').innerHTML = ''; // for remove previously searched songs
         document.getElementById('single-lyrics').innerHTML = ''; // for close previously opened Lyrics
-        fetch(`https://api.lyrics.ovh/suggest/${songName}`)
+        fetch(`${api}/suggest/${songName}`)
         .then(res => res.json())
         .then(apiData => {
             const songs = apiData.data;
@@ -39,7 +41,8 @@ function searchResult() {
                 const title = song.title;
                 const artist = song.artist.name;
                 const type = song.type;
-                const img = song.artist.picture_medium;
+                const httpimg = song.artist.picture_medium;
+                const img = "https://" + httpimg.slice(7);
     // result template           
                 const result = document.getElementById('search-result');
                 result.innerHTML += `<div class="single-result row align-items-center my-3 p-3">
